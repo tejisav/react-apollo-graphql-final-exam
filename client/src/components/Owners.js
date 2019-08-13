@@ -15,8 +15,8 @@ const Owners = () => (
       return (
         <ul>
           {data.owners.map(({ id, firstName, lastName }) => (
-            <Container>
-              <List>
+            <Container key={id}>
+              <List key={id}>
                 <Owner
                   key={id}
                   id={id}

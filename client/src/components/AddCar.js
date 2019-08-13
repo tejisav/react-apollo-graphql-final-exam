@@ -23,9 +23,10 @@ class AddCar extends Component {
       <Mutation
         mutation={ADD_CAR}
         update={(store, { data: { addCar } }) => {
-          const { cars } = store.readQuery({ query: GET_CARS })
+          const { cars } = store.readQuery({ query: GET_CARS, variables: { ownerId: ownerId } })
           store.writeQuery({
             query: GET_CARS,
+            variables: { ownerId: ownerId },
             data: { cars: cars.concat([addCar])}
           })
         }}
@@ -105,9 +106,10 @@ class AddCar extends Component {
                       name: 'owner',
                       id: 'owner-id',
                     }}
+                    variant='outlined'
                   >
                     {data.owners.map(({ id, firstName, lastName }) => (
-                      <MenuItem value={id}>{firstName + ' ' + lastName}</MenuItem>
+                      <MenuItem key={id} value={id}>{firstName + ' ' + lastName}</MenuItem>
                     ))}
                   </Select>
                 )

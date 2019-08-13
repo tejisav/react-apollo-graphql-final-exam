@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server'
-import { find, remove } from 'lodash'
+import { find, remove, filter } from 'lodash'
 
 const owners = [
   {
@@ -112,7 +112,7 @@ const typeDefs = gql`
 
   type Query {
     owners: [Owner]
-    cars: [Car]
+    cars(ownerId: String!): [Car]
   }
 
   type Mutation {
@@ -128,7 +128,9 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     owners: () => owners,
-    cars: () => cars
+    cars: (root, args) => {
+      return filter(cars, { ownerId: args.ownerId });
+    }
   },
   Mutation: {
     addOwner: (root, args) => {

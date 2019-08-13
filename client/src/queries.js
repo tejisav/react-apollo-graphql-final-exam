@@ -41,8 +41,8 @@ export const REMOVE_OWNER = gql`
 `
 
 export const GET_CARS = gql`
-  {
-    cars {
+  query cars($ownerId: String!) {
+    cars(ownerId: $ownerId) {
       id
       year
       make
@@ -66,17 +66,18 @@ export const ADD_CAR = gql`
   }
 `
 
-// export const UPDATE_CAR = gql`
-//   mutation UpdateCar($id: String!, $year: String!, $make: String!, $model: String!, $price: String!, $ownerId: String!) {
-//     updateCar(id: $id, year: $year, make: $make, model: $model, price: $price, ownerId: $ownerId) {
-//       id
-//       year
-//       make
-//       model
-//       price
-//       ownerId
-//   }
-// `
+export const UPDATE_CAR = gql`
+  mutation UpdateCar($id: String!, $year: String!, $make: String!, $model: String!, $price: String!, $ownerId: String!) {
+    updateCar(id: $id, year: $year, make: $make, model: $model, price: $price, ownerId: $ownerId) {
+      id
+      year
+      make
+      model
+      price
+      ownerId
+    }
+  }
+`
 
 export const REMOVE_CAR = gql`
   mutation RemoveCar($id: String!) {
